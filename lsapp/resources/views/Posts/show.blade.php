@@ -18,4 +18,26 @@
             {!! Form::close() !!}
         @endif
     @endif
+
+    {{-- Comment Logic --}}
+            <div class="comment-list">
+                @foreach ($post->comments as $comment)
+                    <h4>{{ $comment->body }}</h4>
+                    <lead>{{ $comment->user->name }}</lead>
+                    <br>
+                    <br>
+                @endforeach
+            </div>
+            <div class="comment-from">
+                <form action="{{ route('postcomment.store', $post->id) }}" method="post" role="form" >
+                    {{ csrf_field() }}
+                    {{-- <legend>Create Comment</legend> --}}
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="body" id="" placeholder="">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comment </button>
+                </form>
+            </div>
+
 @endsection
